@@ -1,0 +1,61 @@
+import React, { useState } from 'react'
+
+function Profile() {
+    const [post,setPost]=useState(true);
+    const togglePost=()=>{
+        setPost(!post);
+    }
+  return (
+    <div className='h-screen w-full flex justify-center items-center'>
+        
+            <div className='h-full w-[700px] flex-col flex items-center justify-start pt-13'>
+                <div className='h-[300px] w-full flex'>
+                    <div className='h-full w-[40%] flex items-center justify-center'>
+                        <div className='h-[200px] w-[200px] rounded-[100%] overflow-hidden'>
+                            <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className='object-cover h-full w-full'/>
+                        </div>
+                    </div>
+                    <div className='h-full w-[60%] '>
+                        <div className='h-[60%] w-full flex'>
+                            <div className='h-full w-[50%] flex items-end justify-start pl-10'>
+                                <p className='text-bold text-[20px]'>Astitvaa__</p>
+                            </div>
+                            <div className='h-full w-[50%]'>
+                                
+                            </div>
+                        </div>
+                        <div className='h-[40%] w-full pr-20 pl-10'>
+                            <p className='text-sm text-gray-600'>Success Lies in Satisfaction</p>
+                        </div>
+                    </div>
+                </div>
+                <div className='h-20 w-full flex mt-10 border-b-2 border-gray-300'>
+                    <div className='h-full w-[50%] flex items-center justify-center'>
+                        <button className={`h-[100%] w-[40%] ${post?'border-b-6 border-blue-600':''}`} onClick={togglePost}>
+                            Posts
+                        </button>
+                        
+                    </div>
+                    <div className='h-full w-[50%] flex items-center justify-center'>
+                        <button className={`h-[100%] w-[40%] ${post?'':'border-b-6 border-blue-600'}`}  onClick={togglePost}>
+                            Activity
+                        </button>
+                    </div>
+
+
+                </div>
+                {post?
+                <div className='h-full w-full p-15 flex items-center justify-center'>
+                    <p>Nothing is posted</p>
+                </div>:
+                <div className='h-full w-full p-15 flex items-center justify-center'>
+                    <p>No Activity till now</p>
+                </div>}
+            </div>
+        
+      
+    </div>
+  )
+}
+
+export default Profile
