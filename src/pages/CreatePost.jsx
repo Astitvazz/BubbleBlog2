@@ -1,101 +1,220 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
-import ImageCarousel from '../components/ImageCarousel';
+import ImageCarousel from "../components/ImageCarousel";
+import axios from "axios";
 
-function Createpost({isOpen}) {
-  const [content,setContent]=useState(true);
-  const [images, setImages]=useState(false);
-  const [link,setLink]=useState(false);
-  const [text,setText]=useState({
-    title:'',
-    content:'',
-    link:'',
-  })
-  const [fileLinkArray, setFileLinkArray]=useState([])
-  const handleChange=(e)=>{
-    console.log(text)
-    setText((prev)=>{
-      return{...prev,[e.target.name]:e.target.value}
-    })
-  }
-  const toggleContent=()=>{
+function Createpost({ isOpen }) {
+  const [content, setContent] = useState(true);
+  const [images, setImages] = useState(false);
+  const [link, setLink] = useState(false);
+  const [fileArray, setFileArray] = useState([]);
+  const [errors, setErrors] = useState({
+    titleError: "",
+    contentError: "",
+  });
+  const [freez, setFreez] = useState(true);
+  const [text, setText] = useState({
+    title: "",
+    content: "",
+    link: "",
+  });
+  const [fileLinkArray, setFileLinkArray] = useState([]);
+  const handleChange = (e) => {
+    console.log(text);
+    setText((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+    
+  };
+  const toggleContent = () => {
     setContent(true);
     setImages(false);
     setLink(false);
-  }
-  const toggleImages=()=>{
+  };
+  const toggleImages = () => {
     setContent(false);
     setImages(true);
     setLink(false);
-  }
-  const toggleLinks=()=>{
+  };
+  const toggleLinks = () => {
     setContent(false);
     setImages(false);
     setLink(true);
-  }
-  const handleFileUpload=(e)=>{
-    const files=e.target.files;
-    const fileArray = Array.from(files);
-    fileArray.forEach(file => {
-      setFileLinkArray((prev)=>{
-        return[
-          ...prev,URL.createObjectURL(file)
-        ]
-      })
+  };
+  const handleFileUpload = (e) => {
+    const files = e.target.files;
+    const newFiles = Array.from(files);
+    setFileArray((prev) => {
+      return [...prev, ...newFiles];
     });
-    console.log(files)
-  }
+    const fileArray = Array.from(files);
+    fileArray.forEach((file) => {
+      setFileLinkArray((prev) => {
+        return [...prev, URL.createObjectURL(file)];
+      });
+    });
+    console.log(files);
+  };
+  const handleSubmit = async () => {
+    // Reset errors
+    setErrors({ titleError: "", contentError: "" });
+
+    let hasError=false;
+
+    // Validation checks
+    if (text.title.trim() === "") {
+      setErrors((prev) => ({ ...prev, titleError: "Title can't be empty" }));
+      hasError = true;
+    }
+    if (text.content.trim() === "") {
+      setErrors((prev) => ({
+        ...prev,
+        contentError: "Content can't be empty",
+      }));
+      hasError = true;
+    }
+
+    if (hasError) {
+      setFreez(true); // Keep button disabled
+      return; // Stop execution
+    }
+
+     // Enable button for posting
+
+    try {
+      const formData = new FormData();
+      formData.append("title", text.title);
+      formData.append("link", text.link);
+      formData.append("content", text.content);
+
+      fileArray.forEach((file) => {
+        formData.append("images", file);
+      });
+
+      const response = await axios.post("/", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      console.log("Form posted successfully", response.data);
+    } catch (error) {
+      console.log("Something went wrong", error);
+    }
+  };
+  useEffect(()=>{
+    if(text.content.trim()!==''&&text.title.trim()!==''){
+      setFreez(false);
+    }
+    if(text.content.trim()===''||text.title.trim()===''){
+      setFreez(true);
+    }
+  },[text])
   return (
     <>
-      <div className='w-full h-screen flex justify-center items-center'>
-          <div className='h-[650px] w-[800px] flex flex-col justify-start items-center pt-10'>
-              <div className='w-[80%] h-20  pt-2 '>
-                <button className={`w-[20%]  h-[80%] ${content?'border-b-8 border-blue-800':'border-none'} mr-2 text-bold`} onClick={toggleContent}>Content</button>
-                <button className={`w-[20%]  h-[80%] ${images?'border-b-8 border-blue-800':'border-none'} mr-2 text-bold`} onClick={toggleImages}>Images</button>
-                <button className={`w-[20%]  h-[80%] ${link?'border-b-8 border-blue-800':'border-none'} mr-2 text-bold`} onClick={toggleLinks}>Links</button>
-              </div>
-              <input name='title' type='text' placeholder='Add Title...' className='focus:outline-none focus:ring-0 w-[80%] h-20 border-2 border-gray-400  rounded p-2 text-sm mb-6' onChange={handleChange}/>
-              {
-                content?
-              <textarea name='content' className='focus:outline-none focus:ring-0 w-[80%] h-60 border-2 border-gray-400 rounded p-2 ' placeholder='Add Content...' onChange={handleChange}/>
-              :''
-              }
-              {
-                images?
-                <>
-                <div className='w-[80%] h-15  border-2 border-gray-400 border-b-white p-2 flex items-center justify-center '>
-                    <input type='file' id='upload' multiple hidden onChange={handleFileUpload}/>
-                    <p className='text-sm m-1 text-gray-600'>upload media</p>
-                    <label htmlFor='upload'>
-                    <IoCloudUploadOutline className='text-gray-800 w-[30px] h-[30px] p-1 bg-gray-200 rounded-[100%] hover:bg-gray-300' />
-                    </label>
-                </div>
-                <div className='w-[80%] h-80  border-2 border-gray-400 border-t-white p-2 flex items-center justify-center '>
-                    <ImageCarousel images={fileLinkArray}/>
-                </div>
-                </>:''
-              }
-              {
-                link?
-                <>
-                <input name='link' type='text' placeholder='Add Links...' className='focus:outline-none focus:ring-0 w-[80%] h-20  border-2 border-gray-400  rounded p-2 text-sm mb-6' onChange={handleChange}/>
-
-                </>
-                :''
-              }
-              {
-            link?
-          <button className='w-[13%] h-10 border-2 bg-gray-200 border-gray-400 rounded-2xl text-semibold text-[15px] text-gray-800 mt-4'>Post</button>
-          :''
-          }
-              
+      <div className="w-full h-screen flex justify-center items-center">
+        <div className="h-[650px] w-[800px] flex flex-col justify-start items-center pt-10">
+          <div className="w-[80%] h-20  pt-2 ">
+            <button
+              className={`w-[20%]  h-[80%] ${
+                content ? "border-b-8 border-blue-800" : "border-none"
+              } mr-2 text-bold`}
+              onClick={toggleContent}
+            >
+              Content
+            </button>
+            <button
+              className={`w-[20%]  h-[80%] ${
+                images ? "border-b-8 border-blue-800" : "border-none"
+              } mr-2 text-bold`}
+              onClick={toggleImages}
+            >
+              Images
+            </button>
+            <button
+              className={`w-[20%]  h-[80%] ${
+                link ? "border-b-8 border-blue-800" : "border-none"
+              } mr-2 text-bold`}
+              onClick={toggleLinks}
+            >
+              Links
+            </button>
           </div>
-          
-          
+          <input
+            name="title"
+            type="text"
+            value={text.title}
+            placeholder="Add Title..."
+            className="focus:outline-none focus:ring-0 w-[80%] h-20 border-2 border-gray-400  rounded p-2 text-sm"
+            onChange={handleChange}
+          />
+          <div className="text-red-500 h-6 text-sm w-[80%]">
+            {errors.titleError}
+          </div>
+          {content ? (
+            <>
+              <textarea
+                name="content"
+                className="focus:outline-none focus:ring-0 w-[80%] h-60 border-2 border-gray-400 rounded p-2 "
+                value={text.content}
+                placeholder="Add Content..."
+                onChange={handleChange}
+              />
+              <div className="text-red-500 h-6 text-sm w-[80%]">
+                {errors.contentError}
+              </div>
+            </>
+          ) : (
+            ""
+          )}
+          {images ? (
+            <>
+              <div className="w-[80%] h-15  border-2 border-gray-400 border-b-white p-2 flex items-center justify-center ">
+                <input
+                  type="file"
+                  id="upload"
+                  multiple
+                  hidden
+                  onChange={handleFileUpload}
+                />
+                <p className="text-sm m-1 text-gray-600">upload media</p>
+                <label htmlFor="upload">
+                  <IoCloudUploadOutline className="text-gray-800 w-[30px] h-[30px] p-1 bg-gray-200 rounded-[100%] hover:bg-gray-300" />
+                </label>
+              </div>
+              <div className="w-[80%] h-80  border-2 border-gray-400 border-t-white p-2 flex items-center justify-center overflow-hidden ">
+                <ImageCarousel images={fileLinkArray} />
+              </div>
+            </>
+          ) : (
+            ""
+          )}
+          {link ? (
+            <>
+              <input
+                name="link"
+                type="text"
+                placeholder="Add Links..."
+                className="focus:outline-none focus:ring-0 w-[80%] h-20  border-2 border-gray-400  rounded p-2 text-sm mb-6"
+                onChange={handleChange}
+              />
+            </>
+          ) : (
+            ""
+          )}
+
+          <button
+            className={`w-[13%] h-10 border-2 ${
+              freez
+                ? "bg-gray-200 border-gray-400"
+                : "bg-blue-800 border-blue-800 text-white"
+            } rounded-2xl text-semibold text-[15px] text-gray-800 mt-4`}
+            onClick={handleSubmit}
+          >
+            Post
+          </button>
+        </div>
       </div>
     </>
-
-  )
+  );
 }
 
-export default Createpost
+export default Createpost;
