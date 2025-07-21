@@ -1,5 +1,5 @@
  import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import axios from 'axios';
 import { MdErrorOutline } from "react-icons/md";
 
@@ -10,7 +10,6 @@ function RegistrationForm() {
     email: '',
     password: ''
   });
-  const navigate=useNavigate();
   const [error, setError] = useState({
     usernameError: '',
     emailError: '',
@@ -77,7 +76,6 @@ function RegistrationForm() {
         );
         console.log(response.data);
         alert(response.data.message);
-        navigate('/register2');
       } catch (err) {
         if(err.response && err.response.data) {
           if(err.response && err.response.data) {
