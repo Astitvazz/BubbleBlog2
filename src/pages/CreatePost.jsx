@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { IoCloudUploadOutline } from "react-icons/io5";
+import ImageCarousel from '../components/ImageCarousel';
 
 function Createpost({isOpen}) {
   const [content,setContent]=useState(true);
@@ -10,6 +11,7 @@ function Createpost({isOpen}) {
     content:'',
     link:'',
   })
+  const [fileLinkArray, setFileLinkArray]=useState([])
   const handleChange=(e)=>{
     console.log(text)
     setText((prev)=>{
@@ -33,6 +35,14 @@ function Createpost({isOpen}) {
   }
   const handleFileUpload=(e)=>{
     const files=e.target.files;
+    const fileArray = Array.from(files);
+    fileArray.forEach(file => {
+      setFileLinkArray((prev)=>{
+        return[
+          ...prev,URL.createObjectURL(file)
+        ]
+      })
+    });
     console.log(files)
   }
   return (
@@ -53,12 +63,15 @@ function Createpost({isOpen}) {
               {
                 images?
                 <>
-                <div className='w-[80%] h-60  border-2 border-gray-400 rounded p-2 hover:w-[82%] flex items-center justify-center '>
-                    <input type='file' id='upload' multiple hidden/>
+                <div className='w-[80%] h-15  border-2 border-gray-400 border-b-white p-2 flex items-center justify-center '>
+                    <input type='file' id='upload' multiple hidden onChange={handleFileUpload}/>
                     <p className='text-sm m-1 text-gray-600'>upload media</p>
-                    <label for='upload'>
-                    <IoCloudUploadOutline className='text-gray-800 w-[30px] h-[30px] p-1 bg-gray-200 rounded-[100%] hover:bg-gray-300' onClick={handleFileUpload}/>
+                    <label htmlFor='upload'>
+                    <IoCloudUploadOutline className='text-gray-800 w-[30px] h-[30px] p-1 bg-gray-200 rounded-[100%] hover:bg-gray-300' />
                     </label>
+                </div>
+                <div className='w-[80%] h-80  border-2 border-gray-400 border-t-white p-2 flex items-center justify-center '>
+                    <ImageCarousel images={fileLinkArray}/>
                 </div>
                 </>:''
               }
