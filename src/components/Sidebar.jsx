@@ -21,7 +21,7 @@ function Sidebar({isOpen,toggleSidebar}) {
   
   return (
   
-    <div className={`${isOpen?'w-[275px]':'w-[70px]'} left-0 top-16 overflow-y-auto p-5 p-2 h-screen bg-white border-r fixed border-r-gray-300 pt-4 transition-all duration-300 ease-in-out overflow-hidden z-10`}>
+    <div className={`${isOpen?'w-[275px]':'w-[1%]'} left-0 top-16 overflow-y-auto p-5 p-2 h-full bg-white border-r fixed border-r-gray-300 pt-4 transition-all duration-300 ease-in-out overflow-hidden z-10`}>
         <div className='w-full h-10  rounded-2xl flex items-center justify-end p-2 mb-1'>
           <button className='rounded-full hover:bg-gray-300 fixed' onClick={toggleSidebar}>
 

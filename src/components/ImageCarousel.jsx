@@ -14,7 +14,7 @@ function ImageCarousel({ images }) {
     >
       {images.map((img, i) => (
         <SwiperSlide key={i}>
-          <img src={img} alt={`Slide ${i}`} className="w-full h-[400px] object-cover rounded-2xl" />
+          <img src={img} alt={`Slide ${i}`} className="w-full h-[300px] sm:h-[400px] md:h-[400px] rounded-2xl object-cover" />
         </SwiperSlide>
       ))}
     </Swiper>

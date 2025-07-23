@@ -14,6 +14,7 @@ import Login from './Login';
 import RegistrationForm from './RegistrationForm';
 import CreatePost from './Createpost';
 import Profile from './Profile';
+import FullBlog from './fullBlog';
 
 
 function Landing({Blogarray,isOpen}) {
@@ -28,9 +29,12 @@ function Landing({Blogarray,isOpen}) {
         </Route>
 
         <Route element={<Mainlayout/>}>
+        
           <Route path="/" element={<Blogholder isOpen={isOpen} Blogarray={Blogarray}/>}/>
           <Route path='/create' element={<CreatePost isOpen={isOpen}/>}/>
           <Route path='/profile' element={<Profile/>}/>
+          <Route path='/blog' element={<FullBlog/>}/>
+        
         </Route>
       </Routes>
     </Router>

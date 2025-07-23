@@ -3,7 +3,7 @@ import { IoCloudUploadOutline } from "react-icons/io5";
 import ImageCarousel from "../components/ImageCarousel";
 import axios from "axios";
 
-function Createpost({ isOpen }) {
+function Createpost() {
   const [content, setContent] = useState(true);
   const [images, setImages] = useState(false);
   const [link, setLink] = useState(false);
@@ -108,10 +108,11 @@ function Createpost({ isOpen }) {
       setFreez(true);
     }
   },[text])
+  const { isOpen } = useOutletContext();
   return (
     <>
-      <div className="w-full h-screen flex justify-center items-center">
-        <div className="h-[650px] w-[800px] flex flex-col justify-start items-center pt-10">
+      
+        <div className={`h-screen ${isOpen?'ml-[500px]':''} w-[1000px] flex flex-col justify-start items-center pt-10`}>
           <div className="w-[80%] h-20  pt-2 ">
             <button
               className={`w-[20%]  h-[80%] ${
@@ -146,7 +147,7 @@ function Createpost({ isOpen }) {
             className="focus:outline-none focus:ring-0 w-[80%] h-20 border-2 border-gray-400  rounded p-2 text-sm"
             onChange={handleChange}
           />
-          <div className="text-red-500 h-6 text-sm w-[80%]">
+          <div className="text-red-700 h-6 text-[13px] w-[80%]">
             {errors.titleError}
           </div>
           {content ? (
@@ -158,7 +159,7 @@ function Createpost({ isOpen }) {
                 placeholder="Add Content..."
                 onChange={handleChange}
               />
-              <div className="text-red-500 h-6 text-sm w-[80%]">
+              <div className="text-red-700 h-6 text-[13px] w-[80%]">
                 {errors.contentError}
               </div>
             </>
@@ -212,7 +213,7 @@ function Createpost({ isOpen }) {
             Post
           </button>
         </div>
-      </div>
+      
     </>
   );
 }

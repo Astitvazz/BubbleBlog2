@@ -8,10 +8,10 @@ function Profile() {
   return (
     <div className='h-screen w-full flex justify-center items-center'>
         
-            <div className='h-full w-[700px] flex-col flex items-center justify-start pt-13'>
+            <div className='h-full w-[700px] xl:w-[900px] flex-col flex items-center justify-start pt-30 pl-5 pr-5'>
                 <div className='h-[300px] w-full flex'>
                     <div className='h-full w-[40%] flex items-center justify-center'>
-                        <div className='h-[200px] w-[200px] rounded-[100%] overflow-hidden'>
+                        <div className='h-[150px] xl:h-[200px] w-[150px] xl:w-[200px] rounded-[100%] overflow-hidden'>
                             <img src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png' className='object-cover h-full w-full'/>
                         </div>
                     </div>

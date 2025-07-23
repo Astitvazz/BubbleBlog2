@@ -28,11 +28,11 @@ const handleLogout=()=>{
   navigate('/');
 }
   return (
-    <div className=' fixed w-full p-2 h-16 bg-white flex justify-between align-center fixed px-4 border-b border-b-gray-300 top-0 sticky z-50 left-0'>
+    <div className=' fixed w-full p-2 h-16 bg-white flex justify-between align-center fixed  border-b border-b-gray-300 top-0  z-50 left-0'>
       
       <img src={img} alt='logo' className='w-[10%] h-full'/>
       
-      <input className='w-[28%] pl-5 h-full flex justify-center items-center rounded-2xl border-2 border-gray-300 hover:border-gray-400' placeholder='Search...' type='text'>
+      <input className='w-[28%] pl-5 h-[80%] flex justify-center items-center rounded-2xl border-2 border-gray-300 hover:border-gray-400' placeholder='Search...' type='text'>
       </input>
       <div className='flex items-center pr-14 justify-end w-[30%] h-full'>
        { user.username ? (<>

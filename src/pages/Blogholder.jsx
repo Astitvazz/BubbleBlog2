@@ -7,9 +7,9 @@ function Blogholder({Blogarray}) {
   return (
     
     <>
-    <div className='w-full h-full flex items-center justify-center'>
-    <div className='w-[50%] h-[50%]'>
-    <div className={` ${isOpen?'left-[25%] right-[25%]':'left-[20%] right-[30%]'} transition-all duration-300 ease-in-out top-16 bottom-0 overflow-y-auto p-4 pr-6 pl-6 scrollbar-hide`}>
+    <div className='h-full w-full flex justify-center items-center'>
+    <div className='h-full w-[700px] xl:w-[900px] flex-col flex items-center justify-start pt-30 bg-blue-600 pl-5 pr-5'>
+    
       {
         Blogarray.map((blog, index) => (
             <Blogcard key={index} blog={blog} />
@@ -17,7 +17,7 @@ function Blogholder({Blogarray}) {
       }
     </div>
     </div>
-    </div>
+
     </>
   )
 }
