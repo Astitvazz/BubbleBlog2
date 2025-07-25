@@ -1,10 +1,30 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 
 function Profile() {
     const [post,setPost]=useState(true);
+    const [user,setUser]=useState({username:'',bio:''});
     const togglePost=()=>{
         setPost(!post);
     }
+    useEffect(()=>{
+    const fetchUser=async()=>{
+        try{
+        const token = localStorage.getItem('token');
+        const userFound=await axios.get('http://localhost:3000/api/user/me',
+            {headers : {'Authorization': `Bearer ${token}`}}
+        )
+        setUser({
+            username:userFound.data.username,
+            bio:userFound.data.bio
+        });
+        console.log("got the user");
+    }
+    catch(error){
+        console.log("Can't fetch user data",error);
+    }
+    }
+    fetchUser();},[])
   return (
     <div className='h-screen w-full flex justify-center items-center'>
         
@@ -18,14 +38,14 @@ function Profile() {
                     <div className='h-full w-[60%] '>
                         <div className='h-[60%] w-full flex'>
                             <div className='h-full w-[50%] flex items-end justify-start pl-10'>
-                                <p className='text-bold text-[20px]'>Astitvaa__</p>
+                                <p className='text-bold text-[20px]'>{user.username}</p>
                             </div>
                             <div className='h-full w-[50%]'>
                                 
                             </div>
                         </div>
                         <div className='h-[40%] w-full pr-20 pl-10'>
-                            <p className='text-sm text-gray-600'>Success Lies in Satisfaction</p>
+                            <p className='text-sm text-gray-600'>{user.bio}</p>
                         </div>
                     </div>
                 </div>

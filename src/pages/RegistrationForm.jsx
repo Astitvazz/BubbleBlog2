@@ -103,16 +103,16 @@ function RegistrationForm() {
 
   return (
     <div className="w-full h-screen flex items-center justify-center bg-white">
-      <div className="w-[30%] h-[70%] rounded-lg p-8 flex-col items-center justify-center">
+      <div className='w-[70%] md:w-[40%] lg:w-[25%] h-[70%] rounded-lg p-8 flex-col items-center justify-center'>
         {/* Username */}
-        <div className="mb-2 font-semibold">Username</div>
+        <div className='mb-3 text-[14px] font-semibold'>Username</div>
         <div className="w-full h-12">
           <input
             type="text"
             onChange={handleChange}
             placeholder="Enter Username"
             name="username"
-            className={`pl-3 w-full h-full border-2 rounded ${error.usernameError.length===0?'border-gray-300':'border-red-400'}  hover:bg-gray-200`}
+            className={`pl-3 w-full h-full border-2 rounded ${error.usernameError.length===0?'border-gray-300':'border-red-400'} text-[13px]  hover:bg-gray-200`}
           />
         </div>
         <div className="w-full h-6 mb-4 text-[12px] text-red-500 p-1 mb-6">
@@ -120,14 +120,14 @@ function RegistrationForm() {
         </div>
 
         {/* Email */}
-        <div className="mb-2 font-semibold">Email Address</div>
+        <div className='mb-3 text-[14px] font-semibold'>Email Address</div>
         <div className="w-full h-12">
           <input
             type="email"
             onChange={handleChange}
             placeholder="Enter Email"
             name="email"
-            className={`pl-3 w-full h-full border-2 rounded ${error.emailError.length===0?'border-gray-300':'border-red-400'}  hover:bg-gray-200`}
+            className={`pl-3 w-full h-full border-2 rounded ${error.emailError.length===0?'border-gray-300':'border-red-400'} text-[13px] hover:bg-gray-200`}
           />
         </div>
         <div className="w-full h-6 mb-4 text-[12px] text-red-500 p-1 mb-6">
@@ -135,14 +135,14 @@ function RegistrationForm() {
         </div>
 
         {/* Password */}
-        <div className="mb-2 font-semibold">Password</div>
+        <div className='mb-3 text-[14px] font-semibold'>Password</div>
         <div className="w-full h-12">
           <input
             type="password"
             onChange={handleChange}
             placeholder="Enter Password"
             name="password"
-            className={`pl-3 w-full h-full border-2 rounded ${error.passwordError.length===0?'border-gray-300':'border-red-400'}  hover:bg-gray-200`}
+            className={`pl-3 w-full h-full border-2 rounded ${error.passwordError.length===0?'border-gray-300':'border-red-400'} text-[13px] hover:bg-gray-200`}
           />
         </div>
         <div className="w-full h-6 mb-4 text-[12px] text-red-500 p-1 mb-6">

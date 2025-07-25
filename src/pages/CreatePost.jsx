@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import ImageCarousel from "../components/ImageCarousel";
 import axios from "axios";
+import { useOutletContext } from "react-router-dom";
 
 function Createpost() {
   const [content, setContent] = useState(true);
@@ -56,6 +57,7 @@ function Createpost() {
     console.log(files);
   };
   const handleSubmit = async () => {
+    const token = localStorage.getItem('token');
     // Reset errors
     setErrors({ titleError: "", contentError: "" });
 
@@ -91,12 +93,14 @@ function Createpost() {
         formData.append("images", file);
       });
 
-      const response = await axios.post("/", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+      const response = await axios.post("http://localhost:3000/api/blog", formData, {
+        headers: { "Content-Type": "multipart/form-data" ,
+        'Authorization': `Bearer ${token}`}
       });
-
+      alert("posted!!!!")
       console.log("Form posted successfully", response.data);
     } catch (error) {
+      alert(error)
       console.log("Something went wrong", error);
     }
   };
@@ -112,7 +116,7 @@ function Createpost() {
   return (
     <>
       
-        <div className={`h-screen ${isOpen?'ml-[500px]':''} w-[1000px] flex flex-col justify-start items-center pt-10`}>
+        <div className={`h-screen ${isOpen?'lg:ml-[250px]':'lg:ml-[100px]'} w-[1000px] flex flex-col justify-start items-center pt-25 transition-all duration-300 ease-in-out`}>
           <div className="w-[80%] h-20  pt-2 ">
             <button
               className={`w-[20%]  h-[80%] ${

@@ -21,7 +21,7 @@ function Sidebar({isOpen,toggleSidebar}) {
   
   return (
   
-    <div className={`${isOpen?'w-[275px]':'w-[1%]'} left-0 top-16 overflow-y-auto p-5 p-2 h-full bg-white border-r fixed border-r-gray-300 pt-4 transition-all duration-300 ease-in-out overflow-hidden z-10`}>
+    <div className={`${isOpen?'w-[275px] lg:w-[330px]':'w-[1%]'} left-0 top-16 overflow-y-auto p-5 p-2 h-full bg-white fixed pt-4 transition-all duration-300 ease-in-out overflow-hidden z-10 sm:pl-2 lg:pl-13`}>
         <div className='w-full h-10  rounded-2xl flex items-center justify-end p-2 mb-1'>
           <button className='rounded-full hover:bg-gray-300 fixed' onClick={toggleSidebar}>
 
@@ -32,22 +32,22 @@ function Sidebar({isOpen,toggleSidebar}) {
         <div className='mb-2 border-b border-gray-300'>
          
         
-        <button className='w-full h-10 rounded-2xl flex items-center justify-start pl-5  mb-1 hover:bg-gray-300' onClick={()=>navigate('/')}>
+        <button className='w-full h-10 rounded-2xl flex items-center justify-start pl-7  mb-1 hover:bg-gray-300' onClick={()=>navigate('/')}>
             <IoMdHome className='text-2xl text-gray-800 mr-3'/>
             <p className='text-sm text-gray-800'>Home</p>
         </button>
         
-        <button className='w-full h-10 rounded-2xl flex items-center justify-start pl-5 mb-1 hover:bg-gray-300' onClick={()=>navigate('/')}>
+        <button className='w-full h-10 rounded-2xl flex items-center justify-start pl-7 mb-1 hover:bg-gray-300' onClick={()=>navigate('/')}>
             <FaArrowTrendUp className='text-2xl text-gray-800 mr-3'/>
             <p className='text-sm text-gray-800'>Trending</p>
         </button>
         <Link to="/create">
-        <button className='w-full h-10 rounded-2xl flex items-center justify-start pl-5 mb-1 hover:bg-gray-300'>
+        <button className='w-full h-10 rounded-2xl flex items-center justify-start pl-7 mb-1 hover:bg-gray-300'>
             <IoMdAdd className='text-2xl text-gray-800 mr-3'/>
             <p className='text-sm text-gray-800'>Create</p>
         </button>
         </Link>
-        <button className='w-full h-10  rounded-2xl flex items-center justify-start pl-5 mb-1 hover:bg-gray-300'>
+        <button className='w-full h-10  rounded-2xl flex items-center justify-start pl-7 mb-1 hover:bg-gray-300'>
             <IoSearch className='text-2xl text-gray-800 mr-3'/>
             <p className='text-sm text-gray-800'>Search</p>
         </button>
@@ -59,20 +59,20 @@ function Sidebar({isOpen,toggleSidebar}) {
             <FaAngleDown />
           </button>
           <div  style={{ display: isResourcesOpen ? 'block' : 'none' }}>
-          <button className='w-full h-10  rounded-2xl flex items-center justify-start pl-5 mb-1 hover:bg-gray-300'>
+          <button className='w-full h-10  rounded-2xl flex items-center justify-start pl-7 mb-1 hover:bg-gray-300'>
             <IoIosHelpCircleOutline className='text-2xl text-gray-800 mr-3'/>
             <p className='text-sm text-gray-800'>Help</p>
           </button>
           
-          <button className='text-gray-800 text-sm w-full h-10  rounded-2xl flex items-center justify-start pl-5 mb-1 hover:bg-gray-300'>
+          <button className='text-gray-800 text-sm w-full h-10  rounded-2xl flex items-center justify-start pl-7 mb-1 hover:bg-gray-300'>
             <FaLinkedin className='text-2xl text-gray-800 mr-3'/>
             Linkedin
           </button>
-          <button className=' text-gray-800 text-sm w-full h-10 rounded-2xl flex items-center justify-start pl-5 mb-1 hover:bg-gray-300'>
+          <button className=' text-gray-800 text-sm w-full h-10 rounded-2xl flex items-center justify-start pl-7 mb-1 hover:bg-gray-300'>
             <SiGmail className='text-2xl text-gray-800 mr-3'/>
             Email Us
           </button>
-          <button className='text-gray-800 text-sm w-full h-10 rounded-2xl flex items-center justify-start pl-5 mb-1 hover:bg-gray-300'>
+          <button className='text-gray-800 text-sm w-full h-10 rounded-2xl flex items-center justify-start pl-7 mb-1 hover:bg-gray-300'>
             <FaRegUser className='text-2xl text-gray-800 mr-3'/>
             About Us
           </button>

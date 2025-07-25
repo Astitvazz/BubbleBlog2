@@ -28,7 +28,7 @@ const handleLogout=()=>{
   navigate('/');
 }
   return (
-    <div className=' fixed w-full p-2 h-16 bg-white flex justify-between align-center fixed  border-b border-b-gray-300 top-0  z-50 left-0'>
+    <div className=' fixed w-full p-2 h-16 bg-white flex justify-between align-center fixed  border-b border-b-gray-300 top-0  z-11 left-0'>
       
       <img src={img} alt='logo' className='w-[10%] h-full'/>
       
