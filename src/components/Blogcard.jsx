@@ -4,10 +4,15 @@ import { BiUpvote } from "react-icons/bi";
 import { BiDownvote } from "react-icons/bi";
 import { FaRegComment } from "react-icons/fa6";
 import { FaShare } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 function Blogcard({ blog }) {
+  const navigate= useNavigate();
+  const openFull=()=>{
+    navigate(`/blog/${blog._id}`)
+  }
   return (
-    <div className=" w-[400px] sm:w-[500px] md:w-[650px] lg-w[700px] xl:w-[750px] 2xl flex-col flex items-center justify-start p-4 overflow-hidden mb-4 border-b-2 border-gray-200 transition-all duration-300 ease-in-out">
+    <div className=" w-[400px] sm:w-[500px] md:w-[650px] lg-w[700px] xl:w-[750px] flex-col flex items-center justify-start p-4 overflow-hidden mb-4 border-b-2 border-gray-200 transition-all duration-300 ease-in-out" onClick={openFull}>
       <div className="w-full rounded-t-2xl pl-2 pr-2">
         <p></p>
       </div>
@@ -16,7 +21,7 @@ function Blogcard({ blog }) {
       </div>
       <div className="w-full rounded-t-2xl pl-2 pr-2 text-gray-700 text-[15px] pb-2">
         <p>
-          {blog.author}
+          {blog.content}
         </p>
       </div>
       <div className="w-full p-1">

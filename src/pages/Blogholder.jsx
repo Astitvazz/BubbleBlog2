@@ -21,8 +21,8 @@ function Blogholder() {
   },[])
   return (
     
-    <>
-    <div className='h-full w-full flex justify-center items-center'>
+    <>t
+    <div className='h-full w-full flex justify-center iems-center'>
     <div className='h-full w-[700px] xl:w-[900px] flex-col flex items-center justify-start pt-24 pl-10 pr-5'>
     
       {
