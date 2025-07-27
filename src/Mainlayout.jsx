@@ -15,7 +15,9 @@ function Mainlayout() {
         <div className='flex'>
            <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar}/>
             <Outlet context={{isOpen}}/>
+            <div className='hidden lg:block lg:flex-1 bg-red-500 lg:fixed h-96 '>
             
+            </div>
         </div>
     </>
   )
