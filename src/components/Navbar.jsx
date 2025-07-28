@@ -4,6 +4,7 @@ import img from "../assets/test-design-china-name.png";
 import { Link } from "react-router-dom"; // Adjust the path as necessary
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Avtar from "./Avtar";
 
 function Navbar() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -46,11 +47,11 @@ function Navbar() {
       <div className="flex items-center pr-14 justify-end w-[30%] h-full">
         {loggedIn ? (
           <>
-            <p>{user.username}</p>
-            <div className="w-[30%] h-full flex items-center justify-center hover:border-2 border-gray-300 rounded-full mr-2">
-              <button onClick={handleLogout} className="ml-2 text-red-500">
-                Logout
-              </button>
+
+            <div className="w-[200px] h-full flex flex-end border-gray-300">
+            <Avtar smallSize={'50px'} largeSize={'50px'}/>
+            <p className="m-2 hidden xl:block">{user.username}</p>
+              
             </div>
           </>
         ) : (

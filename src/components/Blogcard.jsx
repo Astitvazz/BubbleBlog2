@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import {jwtDecode} from 'jwt-decode';
 import { BiSolidUpvote } from "react-icons/bi";
+import Avtar from "./Avtar";
 
 function Blogcard({ blog }) {
   const token = localStorage.getItem("token");
@@ -47,19 +48,23 @@ function Blogcard({ blog }) {
     navigate(`/blog/${blog._id}`)
   }
   return (
-    <div className=" w-[400px] sm:w-[500px] md:w-[650px] lg-w[700px] flex-col flex items-center justify-start p-2  overflow-hidden lg:mb-2 border-b-2 border-gray-200 transition-all duration-300 ease-in-out" >
-      <div className="w-full rounded-t-2xl pl-2 pr-2">
-        <p></p>
+    <div className=" w-[400px] sm:w-[500px] md:w-[650px] lg-w[700px] flex-col flex items-center justify-start p-2 rounded-2xl  overflow-hidden lg:mb-2 border-b-2 border-gray-200 hover:bg-gray-100 transition-all duration-100 ease-in-out" >
+      <div className="w-full flex justify-between items-center">
+        <div className="flex items-center">
+          <Avtar smallSize={'30px'} largeSize={'45px'}/>
+          <p className="text-sm m-2 text-gray-600 ">{blog.author.username}</p>
+        </div>
+        
       </div>
-      <div className="w-full  p-2 ">
-        <h4 className=" font-semibold lg:font-semibold lg:text-2xl" onClick={openFull}>{blog.title}</h4>
+      <div className="w-full  p-2">
+        <h4 className=" font-semibold lg:font-semibold lg:text-[20px]" onClick={openFull}>{blog.title}</h4>
       </div>
       <div className="w-full rounded-t-2xl pl-2 pr-2 text-gray-700 text-[14px] pb-1">
         <p>
           {blog.content}
         </p>
       </div>
-      <div className="w-full p-1">
+      <div className="w-full p-3 rounded-2xl ">
         <ImageCarousel images={blog.images} />
       </div>
       <div className="w-full rounded-b-2xl">
