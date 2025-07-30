@@ -32,7 +32,7 @@ function Landing({Blogarray,isOpen}) {
         
           <Route path="/" element={<Blogholder isOpen={isOpen} Blogarray={Blogarray}/>}/>
           <Route path='/create' element={<CreatePost isOpen={isOpen}/>}/>
-          <Route path='/profile' element={<Profile/>}/>
+          <Route path='/profile/:username' element={<Profile/>}/>
           <Route path='/blog/:id' element={<FullBlog/>}/>
         
         </Route>

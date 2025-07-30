@@ -116,7 +116,7 @@ function Createpost() {
   return (
     <>
       
-        <div className={`h-screen ${isOpen?'lg:ml-[250px]':'lg:ml-[100px]'} w-[1000px] flex flex-col justify-start items-center pt-25 transition-all duration-300 ease-in-out`}>
+        <div className={`h-screen ${isOpen?'lg:ml-[250px]':'lg:ml-[100px]'} w-[900px] flex flex-col justify-start items-center pt-25 transition-all duration-300 ease-in-out`}>
           <div className="w-[80%] h-20  pt-2 ">
             <button
               className={`w-[20%]  h-[80%] ${

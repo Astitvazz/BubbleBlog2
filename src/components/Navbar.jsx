@@ -5,11 +5,14 @@ import { Link } from "react-router-dom"; // Adjust the path as necessary
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Avtar from "./Avtar";
+import useStore from '../store/useStore';
 
 function Navbar() {
+  const {toggleModal  } = useStore();
   const [loggedIn, setLoggedIn] = useState(false);
   const [user,setUser]=useState({});
   const navigate = useNavigate();
+
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -35,8 +38,9 @@ function Navbar() {
     setLoggedIn(false);
     navigate("/");
   };
+  
   return (
-    <div className=" fixed w-full p-2 h-16 bg-white flex justify-between align-center fixed  border-b border-b-gray-300 top-0  z-11 left-0">
+    <div className=" fixed w-full pt-2 pb-2 h-16 bg-white flex justify-between align-center border-b border-b-gray-300 top-0  z-3">
       <img src={img} alt="logo" className="w-[10%] h-full" />
 
       <input
@@ -44,14 +48,14 @@ function Navbar() {
         placeholder="Search..."
         type="text"
       ></input>
-      <div className="flex items-center pr-14 justify-end w-[30%] h-full">
+      <div className="flex justify-end items-center pr-14 right-0 top-0 w-[30%] h-full">
         {loggedIn ? (
           <>
 
-            <div className="w-[200px] h-full flex flex-end border-gray-300">
-            <Avtar smallSize={'50px'} largeSize={'50px'}/>
-            <p className="m-2 hidden xl:block">{user.username}</p>
-              
+            <div className="w-[200px] h-full flex items-center justify-center border-gray-300 right-[70px]" onClick={toggleModal}>
+            <Avtar smallSize={'40px'} largeSize={'40px'}/>
+            <p className="m-2 hidden xl:block" >{user.username}</p>
+             
             </div>
           </>
         ) : (

@@ -4,7 +4,7 @@ import { BiUpvote } from "react-icons/bi";
 import { BiDownvote } from "react-icons/bi";
 import { FaRegComment } from "react-icons/fa6";
 import { FaShare } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import {jwtDecode} from 'jwt-decode';
 import { BiSolidUpvote } from "react-icons/bi";
@@ -50,10 +50,12 @@ function Blogcard({ blog }) {
   return (
     <div className=" w-[400px] sm:w-[500px] md:w-[650px] lg-w[700px] flex-col flex items-center justify-start p-2 rounded-2xl  overflow-hidden lg:mb-2 border-b-2 border-gray-200 hover:bg-gray-100 transition-all duration-100 ease-in-out" >
       <div className="w-full flex justify-between items-center">
+      <Link to={`/profile/${blog.author.username}`}>
         <div className="flex items-center">
           <Avtar smallSize={'30px'} largeSize={'45px'}/>
           <p className="text-sm m-2 text-gray-600 ">{blog.author.username}</p>
         </div>
+      </Link>
         
       </div>
       <div className="w-full  p-2">

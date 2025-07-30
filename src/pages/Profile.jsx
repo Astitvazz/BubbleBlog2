@@ -31,9 +31,9 @@ function Profile() {
         
             <div className='h-full w-[700px] xl:w-[900px] flex-col flex items-center justify-start pt-30 pl-5 pr-5'>
                 <div className='h-[300px] w-full flex'>
-                    <div className='h-full w-[40%] flex items-center justify-center'>
-                        <Avtar smallSize={'150px'} largeSize={'200px'}/>
-                    </div>
+
+                        <Avtar smallSize={'50px'} largeSize={'50px'}/>
+                    
                     <div className='h-full w-[60%] '>
                         <div className='h-[60%] w-full flex'>
                             <div className='h-full w-[50%] flex items-end justify-start pl-10'>
