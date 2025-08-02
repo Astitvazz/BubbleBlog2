@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import ImageCarousel from "../components/ImageCarousel";
 import axios from "axios";
-import { useOutletContext } from "react-router-dom";
+import useStore from "../store/useStore";
 
 function Createpost() {
+  const {isOpen}=useStore();
   const [content, setContent] = useState(true);
   const [images, setImages] = useState(false);
   const [link, setLink] = useState(false);
@@ -112,7 +113,6 @@ function Createpost() {
       setFreez(true);
     }
   },[text])
-  const { isOpen } = useOutletContext();
   return (
     <>
       

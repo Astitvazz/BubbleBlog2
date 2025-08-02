@@ -15,6 +15,7 @@ import RegistrationForm from './RegistrationForm';
 import CreatePost from './Createpost';
 import Profile from './Profile';
 import FullBlog from './fullBlog';
+import CommentCard from '../components/CommentCard';
 
 
 function Landing({Blogarray,isOpen}) {
@@ -26,6 +27,7 @@ function Landing({Blogarray,isOpen}) {
         <Route element={<Authlayout/>}>
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<RegistrationForm/>}/>
+          <Route path='/mycomment' element={<CommentCard/>}/>
         </Route>
 
         <Route element={<Mainlayout/>}>
@@ -34,7 +36,7 @@ function Landing({Blogarray,isOpen}) {
           <Route path='/create' element={<CreatePost isOpen={isOpen}/>}/>
           <Route path='/profile/:username' element={<Profile/>}/>
           <Route path='/blog/:id' element={<FullBlog/>}/>
-        
+          
         </Route>
       </Routes>
     </Router>

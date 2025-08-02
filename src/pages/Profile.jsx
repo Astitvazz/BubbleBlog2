@@ -1,20 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import Avtar from '../components/Avtar';
+import { useParams } from 'react-router-dom';
+import  useStore  from '../store/useStore';
 
 function Profile() {
+    const {isOpen}=useStore();
     const [post,setPost]=useState(true);
     const [user,setUser]=useState({username:'',bio:''});
     const togglePost=()=>{
         setPost(!post);
     }
+    const {username}= useParams();
     useEffect(()=>{
     const fetchUser=async()=>{
         try{
-        const token = localStorage.getItem('token');
-        const userFound=await axios.get('http://localhost:3000/api/user/me',
-            {headers : {'Authorization': `Bearer ${token}`}}
-        )
+        const userFound=await axios.get(`http://localhost:3000/api/user/${username}`,{
+            headers:{
+                Authorization:`Bearer ${localStorage.getItem('token')}`
+            }
+        })
         setUser({
             username:userFound.data.username,
             bio:userFound.data.bio
@@ -25,25 +30,25 @@ function Profile() {
         console.log("Can't fetch user data",error);
     }
     }
-    fetchUser();},[])
+    fetchUser();},[username])
   return (
-    <div className='h-screen w-full flex justify-center items-center'>
+   <div className={`h-full ml-2 w-full ${isOpen?'xl:w-[77%]':'xl:w-[72%]'} flex justify-end iems-center transition-all duration-300 ease-in-out`}>
         
-            <div className='h-full w-[700px] xl:w-[900px] flex-col flex items-center justify-start pt-30 pl-5 pr-5'>
-                <div className='h-[300px] w-full flex'>
+            <div className='h-full w-[700px] lg:w-[800px] flex-col flex items-center justify-start pt-30 pl-5 pr-5 bg-red-400'>
+                <div className='h-[300px] w-full flex bg-blue-600 p-5'>
 
-                        <Avtar smallSize={'50px'} largeSize={'50px'}/>
+                        <Avtar smallSize={'150px'} largeSize={'200px'}/>
                     
-                    <div className='h-full w-[60%] '>
-                        <div className='h-[60%] w-full flex'>
-                            <div className='h-full w-[50%] flex items-end justify-start pl-10'>
+                    <div className='h-full w-[60%] bg-yellow-600'>
+                        <div className='h-[60%] w-full flex bg-red-900'>
+                            <div className='h-full w-[50%] flex items-end justify-start pl-10 bg-brown-600'>
                                 <p className='text-bold text-[20px]'>{user.username}</p>
                             </div>
-                            <div className='h-full w-[50%]'>
+                            <div className='h-full w-[50%] bg-gray-400'>
                                 
                             </div>
                         </div>
-                        <div className='h-[40%] w-full pr-20 pl-10'>
+                        <div className='h-[40%] w-full pr-20 pl-10 bg-black'>
                             <p className='text-sm text-gray-600'>{user.bio}</p>
                         </div>
                     </div>

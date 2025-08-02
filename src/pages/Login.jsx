@@ -1,10 +1,11 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'
+import useAuthStore from '../store/useAuthStore';
 
 function Login() {
-  const navigate = useNavigate();
+  const navigate=useNavigate();
+  const {login}= useAuthStore();
   const [formObject,setFormObject]=useState({
     username:'',
     password:''
@@ -42,9 +43,10 @@ function Login() {
     
         const token =response.data.token;
         console.log(token);
-        localStorage.setItem('token', token);
+        
+        login(token);
         alert(response.data.message);
-        navigate('/');
+        navigate('/')
       }
       catch(error){
         console.error('Login failed:', error);

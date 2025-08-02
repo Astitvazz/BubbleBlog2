@@ -87,8 +87,9 @@ function Blogcard({ blog }) {
             <BiDownvote className="text-lg text-gray-600 hover:text-red-500 transition-colors" />
           </button>
 
-          <button className="w-[30%] lg:w-[20%] flex justify-between items-center p-2.5 rounded-full bg-gray-50 shadow-xs hover:bg-gray-100 hover:shadow-sm transition-all duration-200 ease-in-out border border-gray-100">
+          <button className="w-[30%] lg:w-[20%] flex justify-between items-center p-2.5 rounded-full bg-gray-50 shadow-xs hover:bg-gray-100 hover:shadow-sm transition-all duration-200 ease-in-out border border-gray-100" onClick={openFull}>
             <FaRegComment className="text-lg text-gray-600 hover:text-amber-500 transition-colors" />
+            <p className="text-sm text-gray-600">{blog.comments.length}</p>
           </button>
 
           <button className="w-[30%] lg:w-[20%] flex justify-between items-center p-2.5 rounded-full bg-gray-50 shadow-xs hover:bg-gray-100 hover:shadow-sm transition-all duration-200 ease-in-out border border-gray-100">

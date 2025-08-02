@@ -11,8 +11,10 @@ import { SiGmail } from "react-icons/si";
 import { FaRegUser } from "react-icons/fa6";
 import { Link, useNavigate } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
+import  useStore  from '../store/useStore';
 
-function Sidebar({isOpen,toggleSidebar}) {
+function Sidebar() {
+  const {isOpen , toggleIsOpen} = useStore();
    const navigate = useNavigate();
    const [isResourcesOpen, setIsResourcesOpen] = useState(true);
     const toggleResources = () => {
@@ -21,9 +23,9 @@ function Sidebar({isOpen,toggleSidebar}) {
   
   return (
   
-    <div className={` ${isOpen?'w-[275px] lg:w-[330px]':'w-[1%]'} left-0 top-16 overflow-y-auto p-5 p-2 h-full bg-white fixed pt-4 transition-all duration-300 ease-in-out overflow-hidden z-10 sm:pl-2 lg:pl-13`}>
+    <div className={` ${isOpen?'w-[275px] lg:w-[330px]':'hidden'} left-0 top-16 overflow-y-auto p-5 p-2 h-full bg-white fixed pt-4 transition-all duration-300 ease-in-out overflow-hidden z-10 sm:pl-2 lg:pl-13`}>
         <div className='w-full h-10  rounded-2xl flex items-center justify-end p-2 mb-1'>
-          <button className='rounded-full hover:bg-gray-300 fixed' onClick={toggleSidebar}>
+          <button className='rounded-full hover:bg-gray-300 fixed' onClick={toggleIsOpen}>
 
             <HiMenu className='text-3xl font-bold'/>
           </button>

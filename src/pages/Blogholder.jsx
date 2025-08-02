@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Blogcard from '../components/Blogcard'
-import { useOutletContext } from 'react-router-dom';
 import axios from 'axios';
+import useStore  from '../store/useStore';
 
 function Blogholder() {
-  const { isOpen } = useOutletContext();
+  const {isOpen}=useStore();
   const [blogarray,setblogarray]=useState([]);
   useEffect(()=>{
     const fetchBlogs=async ()=>{
@@ -22,7 +22,7 @@ function Blogholder() {
   
   return (
     
-    <>t
+    <>
     <div className={`h-full ml-2 w-full ${isOpen?'xl:w-[77%]':'xl:w-[72%]'} flex justify-end iems-center transition-all duration-300 ease-in-out`}>
     <div className='h-full w-[700px] xl:w-[900px] flex-col flex items-center justify-start pt-24 pl-10 pr-5'>
     
