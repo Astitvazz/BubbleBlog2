@@ -48,12 +48,12 @@ function Blogcard({ blog }) {
     navigate(`/blog/${blog._id}`)
   }
   return (
-    <div className=" w-[400px] sm:w-[500px] md:w-[650px] lg-w[700px] flex-col flex items-center justify-start p-2 rounded-2xl  overflow-hidden lg:mb-2 border-b-2 border-gray-200 hover:bg-gray-100 transition-all duration-100 ease-in-out" >
+    <div className=" w-[400px] sm:w-[500px] md:w-[650px] bg-white lg-w[700px] flex-col flex items-center justify-start p-2 rounded-2xl  overflow-hidden lg:mb-2 border-b-2 border-gray-200 hover:bg-gray-100 transition-all duration-100 ease-in-out" >
       <div className="w-full flex justify-between items-center">
       <Link to={`/profile/${blog.author.username}`}>
         <div className="flex items-center">
-          <Avtar smallSize={'30px'} largeSize={'45px'}/>
-          <p className="text-sm m-2 text-gray-600 ">{blog.author.username}</p>
+          <Avtar smallSize="h-[40px] w-[40px]" largeSize="h-[40px] w-[40px]" />
+          <p className="text-sm font-bold m-2 text-black ">{blog.author.username}</p>
         </div>
       </Link>
         
@@ -62,7 +62,7 @@ function Blogcard({ blog }) {
         <h4 className=" font-semibold lg:font-semibold lg:text-[20px]" onClick={openFull}>{blog.title}</h4>
       </div>
       <div className="w-full rounded-t-2xl pl-2 pr-2 text-gray-700 text-[14px] pb-1">
-        <p>
+        <p className="text-sm text-gray-700">
           {blog.content}
         </p>
       </div>

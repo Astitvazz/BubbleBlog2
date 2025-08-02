@@ -12,6 +12,8 @@ import { FaRegUser } from "react-icons/fa6";
 import { Link, useNavigate } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import  useStore  from '../store/useStore';
+import { MdLeaderboard } from "react-icons/md";
+import { SiChatbot } from "react-icons/si";
 
 function Sidebar() {
   const {isOpen , toggleIsOpen} = useStore();
@@ -23,7 +25,7 @@ function Sidebar() {
   
   return (
   
-    <div className={` ${isOpen?'w-[275px] lg:w-[330px]':'hidden'} left-0 top-16 overflow-y-auto p-5 p-2 h-full bg-white fixed pt-4 transition-all duration-300 ease-in-out overflow-hidden z-10 sm:pl-2 lg:pl-13`}>
+    <div className={` ${isOpen?'w-[275px] lg:w-[330px]':'hidden'} border-r border-gray-200 left-0 top-16 overflow-y-auto p-5 p-2 h-full bg-white fixed pt-4 transition-all duration-300 ease-in-out overflow-hidden z-10 sm:pl-2 lg:pl-13`}>
         <div className='w-full h-10  rounded-2xl flex items-center justify-end p-2 mb-1'>
           <button className='rounded-full hover:bg-gray-300 fixed' onClick={toggleIsOpen}>
 
@@ -42,6 +44,14 @@ function Sidebar() {
         <button className='w-full h-10 rounded-2xl flex items-center justify-start pl-7 mb-1 hover:bg-gray-300' onClick={()=>navigate('/')}>
             <FaArrowTrendUp className='text-2xl text-gray-800 mr-3'/>
             <p className='text-sm text-gray-800'>Trending</p>
+        </button>
+          <button className='w-full h-10 rounded-2xl flex items-center justify-start pl-7 mb-1 hover:bg-gray-300' onClick={()=>navigate('/')}>
+            <MdLeaderboard className='text-2xl text-gray-800 mr-3'/>
+            <p className='text-sm text-gray-800'>Leaderboards</p>
+        </button>
+        <button className='w-full h-10 rounded-2xl flex items-center justify-start pl-7 mb-1 hover:bg-gray-300' onClick={()=>navigate('/')}>
+            <SiChatbot  className='text-2xl text-gray-800 mr-3'/>
+            <p className='text-sm text-gray-800'>Chat</p>
         </button>
         <Link to="/create">
         <button className='w-full h-10 rounded-2xl flex items-center justify-start pl-7 mb-1 hover:bg-gray-300'>

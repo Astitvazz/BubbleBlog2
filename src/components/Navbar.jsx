@@ -40,7 +40,7 @@ function Navbar() {
   
   
   return (
-    <div className=" fixed w-full pt-2 pb-2 h-16 bg-white flex justify-between align-center border-b border-b-gray-300 top-0  z-3">
+    <div className=" fixed w-full pt-2 pb-2 h-16 bg-white flex justify-between align-center border-b border-b-gray-300 top-0  z-20">
       <div className="flex items-center justify-around w-[200px] h-full">
       <HiMenu className={`${isOpen? 'hidden':'block'} text-3xl font-bold transition-all duration-300 ease-in-out overflow-hidden`} onClick={toggleIsOpen}/>
       <img src={img} alt="logo" className="w-[100px] h-full" />
@@ -56,7 +56,7 @@ function Navbar() {
           <>
 
             <div className="w-[200px] h-full flex items-center justify-center border-gray-300 right-[70px]" onClick={toggleModal}>
-            <Avtar smallSize={'40px'} largeSize={'40px'}/>
+            <Avtar smallSize="h-[40px] w-[40px]" largeSize="h-[40px] w-[40px]" />
             <p className="m-2 hidden xl:block" >{user.username}</p>
              
             </div>

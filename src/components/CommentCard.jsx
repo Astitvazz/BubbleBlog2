@@ -8,7 +8,7 @@ function CommentCard({comment}) {
   
         <div className='h-auto w-full bg-white flex flex-col p-2'>
           <div className='flex items-center space-x-2'>
-            <Avtar smallSize={'40px'} largeSize={'40px'} />
+            <Avtar smallSize="h-[40px] w-[40px]" largeSize="h-[40px] w-[40px]" />
             <p className="text-sm text-gray-600">{comment.author.username}</p>
           </div>
         

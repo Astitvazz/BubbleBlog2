@@ -3,11 +3,13 @@ import axios from 'axios';
 import Avtar from '../components/Avtar';
 import { useParams } from 'react-router-dom';
 import  useStore  from '../store/useStore';
+import Blogcard from '../components/Blogcard';
 
 function Profile() {
     const {isOpen}=useStore();
     const [post,setPost]=useState(true);
-    const [user,setUser]=useState({username:'',bio:''});
+    const [user,setUser]=useState({id:'',username:'',bio:''});
+    const [blogs,setBlogs]=useState([]);
     const togglePost=()=>{
         setPost(!post);
     }
@@ -21,9 +23,12 @@ function Profile() {
             }
         })
         setUser({
+            id:userFound.data._id,
             username:userFound.data.username,
             bio:userFound.data.bio
         });
+        
+        
         console.log("got the user");
     }
     catch(error){
@@ -31,15 +36,32 @@ function Profile() {
     }
     }
     fetchUser();},[username])
-  return (
-   <div className={`h-full ml-2 w-full ${isOpen?'xl:w-[77%]':'xl:w-[72%]'} flex justify-end iems-center transition-all duration-300 ease-in-out`}>
-        
-            <div className='h-full w-[700px] lg:w-[800px] flex-col flex items-center justify-start pt-30 pl-5 pr-5 bg-red-400'>
-                <div className='h-[300px] w-full flex bg-blue-600 p-5'>
+    useEffect(()=>{
+        const fetchBlogs=async ()=>{
+            try {
+                const blogsfound=await axios.get(`http://localhost:3000/api/blog/user/${user.id}`,{
+                    headers:{
+                        Authorization:`Bearer ${localStorage.getItem('token')}`
+                    }
+                })
+                setBlogs(blogsfound.data);
+                console.log("blogs found")
+            } catch (error) {
+                console.error(error.message)
 
-                        <Avtar smallSize={'150px'} largeSize={'200px'}/>
+            }
+        }
+        fetchBlogs()
+    },[user.id])
+  return (
+   <div className={`h-full ml-2 w-full ${isOpen?'xl:w-[77%]':'xl:w-[72%]'} flex justify-end items-center transition-all duration-300 ease-in-out`}>
+        
+            <div className='h-full w-[600px] lg:w-[800px] flex-col flex items-center justify-between pt-30 pl-5 pr-5'>
+                <div className='h-[300px] w-full flex items-center justify-between  bg-blue-600'>
+
+                        <Avtar smallSize="h-[200px] w-[200px]" largeSize="h-[240px] w-[240px]" />
                     
-                    <div className='h-full w-[60%] bg-yellow-600'>
+                    <div className='h-full w-[60%] bg-yellow-600 '>
                         <div className='h-[60%] w-full flex bg-red-900'>
                             <div className='h-full w-[50%] flex items-end justify-start pl-10 bg-brown-600'>
                                 <p className='text-bold text-[20px]'>{user.username}</p>
@@ -69,9 +91,23 @@ function Profile() {
 
                 </div>
                 {post?
-                <div className='h-full w-full p-15 flex items-center justify-center'>
+                    <>
+                {blogs.length==0?
+                    <div className='h-full w-full p-15 flex items-center justify-center'>
                     <p>Nothing is posted</p>
-                </div>:
+                    </div>
+                    :
+                    <>
+                    <div className='h-full w-full flex flex-col items-center justify-center'>
+                    {
+                    blogs.map((blog, index) => (
+                        <Blogcard key={index} blog={blog} />
+                        ))
+                    }
+                    </div>
+                    </>
+                }
+                </>:
                 <div className='h-full w-full p-15 flex items-center justify-center'>
                     <p>No Activity till now</p>
                 </div>}
